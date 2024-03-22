@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Quize App </title>
+</head>
+<style>
+    *{
+    margin: 0px;
+    padding: 0px;
+    font-family: 'poppins', sans-serif;
+    box-sizing: border-box;
+}
+body{
+    background: #001e4d;
+}
+.app{
+    background: #fff;
+    width: 90%;
+    max-width: 600px;
+    margin: 100px auto 0;
+    border-radius: 10px;
+    padding: 30px;
+}
+
+.app h1{
+    font-size: 25px;
+    color: #001e4d;
+    font-weight: 600;
+    border-bottom: 1px solid #333;
+    padding-bottom: 30px;
+}
+
+.quiz{
+padding: 20px 0;
+}
+
+.quiz h1{
+    font-size: 18px;
+    color:#001e4d ;
+    font-weight: 600;
+}
+
+.btn{
+    background: #fff;
+    color: #222;
+    font-weight: 500;
+    width: 100%;
+    border: 1px solid #222;
+    padding: 10px;
+    margin: 10px 0;
+    text-align: left;
+    border-radius: 4px ;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.btn:hover:not([disabled]){
+    background: #222;
+    color: #fff;
+}
+.btn:disabled{
+    cursor:no-drop;
+}
+
+#next-btn{
+    background: #001e4d;
+    color: #fff;
+    font-weight: 500px;
+    width: 150px;
+    border: 0;
+    padding: 10px;
+    margin: 20px auto 0;
+    border-radius: 4px;
+    cursor: pointer;
+    display: none;
+}
+
+.correct{
+    background: #9aeabc;
+
+}
+.incorrect{
+    background: #ff9393;
+}
+
+
+.s{
+    margin-top: 10px;
+}
+a{
+    background: #fff;
+    color: #222;
+    font-weight: 500;
+    width: 100%;
+    border: 1px solid #222;
+    padding: 10px;
+    margin: 10px 0;
+    text-align: left;
+    border-radius: 4px ;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    background: #001e4d;
+    color: #fff;
+   
+}
+</style>
+<body>
+<div class="app">
+    <h1>simple Quiz (English Grammar)</h1>
+    <div class="quiz">
+        <h2 id="question">Question goes here</h2>
+        <div id="answer-buttons">
+            <button class="btn">Answer 1</button>
+            <button class="btn">Answer 2</button>
+            <button class="btn">Answer 3</button>
+            <button class="btn">Answer 4</button>
+        </div>
+        <button id="next-btn">Next</button>
+        <div class="s"><a href="index.html" id="home-link" class="hidden">Home</a></div>
+    
+    </div>
+</div> 
+    <script>
+        const questions = [
+    {
+        question: "The small child does whatever his father _________ (Choose the correct sentence)",
+        answers: [
+            { text: "has done", correct: false },
+            { text: "does", correct: false },
+            { text: "did", correct: false },
+            { text: "had done", correct: true },
+        ]
+    },
+    {
+        question: "You need not come unless you want to (Choose the correct sentence)",
+
+        answers: [
+            { text: "You don't need to come unless you want to", correct: true },
+            { text: "You come only when you want to", correct: false },
+            { text: "You come unless you don't want to", correct: false },
+            { text: "You needn't come until you don't want to", correct: false },
+        ]
+    },
+    {
+        question: "The man _______ I sold my house was a cheat.(Choose the correct answer)",
+        answers: [
+            { text: "to whom I sell", correct: false },
+            { text: "to who I sell", correct: false },
+            { text: "to whom I sold", correct: true },
+            { text: "who was sold to", correct: false },
+        ]
+    },
+    {
+        question: "After driving professor Kumar to the museum she dropped him at his hotel.(Change of Voice)",
+        answers: [
+            { text: "After being driven to the museum, Professor Kumar was dropped at his hotel.", correct: true },
+            { text: "Professor Kumar was being driven dropped at his hotel.", correct: false },
+            { text: "After she had driven Professor Kumar to the museum she had dropped him at his hotel.", correct: false },
+            { text: "After she was driven Professor Kumar to the museum she had dropped him at his hotel.", correct: false },
+        ]
+    },
+    {
+        question: "Who is creating this mess? (Change of Voice)",
+        answers: [
+            { text: "Who has been created this mess?", correct: false },
+            { text: "By whom has this mess been created?", correct: false },
+            { text: "By whom this mess is being created?", correct: false },
+            { text: "By whom is this mess being created?", correct: true },
+        ]
+    },
+    {
+        question: "They greet me cheerfully every morning. (Change of Voice)",
+        answers: [
+            { text: "Every morning I was greeted cheerfully.", correct: false },
+            { text: "I am greeted cheerfully by them every morning.", correct: true },
+            { text: "I am being greeted cheerfully by them every morning.", correct: false },
+            { text: "Cheerful greeting is done by them every morning to me.", correct: false },
+        ]
+    },
+    {
+        question: "____ you play cricket",
+        answers: [
+            { text: "Do", correct: true },
+            { text: "Have", correct: false },
+            { text: "Has", correct: false },
+            { text: "Are", correct: false },
+        ]
+    },
+    {
+        question: "____you seen a lion befere?",
+        answers: [
+            { text: "Did", correct: false },
+            { text: "Have", correct: true },
+            { text: "Do", correct: false },
+            { text: "Are", correct: false },
+        ]
+    },
+    {
+        question: "I have ___ my home work?",
+        answers: [
+            { text: "do", correct:false },
+            { text: "done", correct: true },
+            { text: "have", correct: false },
+            { text: "doing", correct: false },
+        ]
+    },
+    {
+        question: "He was_____yesterday at 5pm",
+        answers: [
+            { text: "study", correct: false },
+            { text: "studied", correct: false },
+            { text: "studying", correct: true },
+            { text: "All are correct", correct: false },
+        ]
+    },
+    {
+        question: "I didn't ____ last night",
+        answers: [
+            { text: "cook", correct: true },
+            { text: "cooked", correct: false },
+            { text: "cooking", correct: false },
+            { text: "all are correct", correct: false },
+        ]
+    },
+    {
+        question: "He _____ the results soon. ",
+        answers: [
+            { text: "will announce", correct: true },
+            { text: "will be announcing", correct: false },
+            { text: "will be announced", correct: false },
+            { text: "will announced", correct: false },
+        ]
+    },
+    {
+        question: "She ____ fine tommrrow",
+        answers: [
+            { text: "will be", correct: true },
+            { text: "will", correct: false },
+            { text: "was", correct: false },
+            { text: "will have", correct: false },
+        ]
+    },
+    {
+        question: "He___ ok now",
+        answers: [
+            { text: "was", correct: false},
+            { text: "is ", correct: true },
+            { text: "will be", correct: false },
+            { text: "all are correct", correct: false },
+        ]
+    },
+    {
+        question: "where is sai, he is ___ me",
+        answers: [
+            { text: "on", correct: false },
+            { text: "over", correct: false },
+            { text: "with", correct: true },
+            { text: "for", correct: false },
+        ]
+    },
+    {
+        question: "If you____there,you would have done it.",
+        answers: [
+            { text: "went", correct: false },
+            { text: "had gone", correct: true },
+            { text: "have gone", correct: false },
+            { text: "are going", correct: false },
+        ]
+    },
+    {
+        question: "If you do not pass in the exam,you _____ the job.",
+        answers: [
+            { text: "will", correct: false },
+            { text: "would get", correct: false },
+            { text: "will not get", correct: true },
+            { text: "would not get", correct: false },
+        ]
+    },
+    {
+        question: "She __________ Ravi",
+        answers: [
+            { text: "is more wiser than", correct: false },
+            { text: "is wiser than", correct: true },
+            { text: "was more wiser than", correct: false },
+            { text: "all are correct", correct: false },
+        ]
+    },
+    {
+        question:"He threw a brick ______ The window",
+        answers: [
+            { text: "on", correct: false },
+            { text: "upon", correct: false },
+            { text: "Through", correct: true },
+            { text: "Though", correct: false },
+        ]
+    },
+    {
+        question:"He ______ to talk to you yesterday",
+        answers: [
+            { text: "wants", correct: false },
+            { text: "is wanting", correct: false },
+            { text: "wanted", correct: true },
+            { text: "want", correct: false },
+        ]
+    },
+
+];
+
+const questionsElement=document.getElementById("question");
+const answerButtons = document.getElementById("answer-buttons");
+const nextButton = document.getElementById("next-btn");
+
+let correctQuestionIndex=0;
+let score = 0;
+
+function startQuiz(){
+correctQuestionIndex=0;
+score=0;
+nextButton.innerHTML="Next";
+showQuestion();
+}
+
+function showQuestion(){
+    resetState();
+    let currentQestion=questions[correctQuestionIndex];
+    let questionNo = correctQuestionIndex+1;
+    questionsElement.innerHTML=questionNo+","+currentQestion.question
+
+    currentQestion.answers.forEach(answer=>{
+        const button=document.createElement("button")
+        button.innerHTML=answer.text;
+        button.classList.add("btn")
+        answerButtons.appendChild(button)
+        if(answer.correct){
+            button.dataset.correct=answer.correct;
+        }
+        button.addEventListener('click',selectAnswer);
+    });
+}
+
+ function resetState() {
+    nextButton.style.display="none"
+    while(answerButtons.firstChild){
+        answerButtons.removeChild(answerButtons.firstChild);
+    }
+ }
+
+ function selectAnswer (e){
+    const selectedBtn = e.target;
+    const isCorrect = selectedBtn.dataset.correct==="true";
+    if(isCorrect){
+        selectedBtn.classList.add("correct")
+        score++;
+    }
+    else{
+        selectedBtn.classList.add("incorrect")
+    }
+    Array.from(answerButtons.children).forEach(button=>{
+       if(button.dataset.correct==="true"){
+        button.classList.add("correct")
+       }
+       button.disabled=true;
+    })
+    nextButton.style.display="block"
+ }
+
+function showScore(){
+    resetState();
+    questionsElement.innerHTML=`your scored ${score} out of ${questions.length}!`;
+    nextButton.innerHTML="play Again"
+    nextButton.style.display="block"
+}
+
+
+function handleNextButton(){
+    correctQuestionIndex++;
+    if(correctQuestionIndex <questions.length){
+        showQuestion()
+    }
+    else{
+        showScore();
+    }
+}
+
+
+
+
+nextButton.addEventListener('click',()=>{
+    if(correctQuestionIndex < questions.length){
+        handleNextButton();
+    }
+    else{
+        startQuiz();
+    }
+})
+
+
+
+startQuiz();
+
+
+
+
+
+    </script>
+</body>
+</html>

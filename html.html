@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Quize App</title>
+</head>
+<style>
+    *{
+    margin: 0px;
+    padding: 0px;
+    font-family: 'poppins', sans-serif;
+    box-sizing: border-box;
+}
+body{
+    background: #001e4d;
+}
+.app{
+    background: #fff;
+    width: 90%;
+    max-width: 600px;
+    margin: 100px auto 0;
+    border-radius: 10px;
+    padding: 30px;
+}
+
+.app h1{
+    font-size: 25px;
+    color: #001e4d;
+    font-weight: 600;
+    border-bottom: 1px solid #333;
+    padding-bottom: 30px;
+}
+
+.quiz{
+padding: 20px 0;
+}
+
+.quiz h1{
+    font-size: 18px;
+    color:#001e4d ;
+    font-weight: 600;
+}
+
+.btn{
+    background: #fff;
+    color: #222;
+    font-weight: 500;
+    width: 100%;
+    border: 1px solid #222;
+    padding: 10px;
+    margin: 10px 0;
+    text-align: left;
+    border-radius: 4px ;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.btn:hover:not([disabled]){
+    background: #222;
+    color: #fff;
+}
+.btn:disabled{
+    cursor:no-drop;
+}
+
+#next-btn{
+    background: #001e4d;
+    color: #fff;
+    font-weight: 500px;
+    width: 150px;
+    border: 0;
+    padding: 10px;
+    margin: 20px auto 0;
+    border-radius: 4px;
+    cursor: pointer;
+    display: none;
+}
+
+.correct{
+    background: #9aeabc;
+
+}
+.incorrect{
+    background: #ff9393;
+}
+
+.s{
+    margin-top: 10px;
+}
+a{
+    background: #fff;
+    color: #222;
+    font-weight: 500;
+    width: 100%;
+    border: 1px solid #222;
+    padding: 10px;
+    margin: 10px 0;
+    text-align: left;
+    border-radius: 4px ;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    background: #001e4d;
+    color: #fff;
+   
+}
+</style>
+<body>
+<div class="app">
+    <h1>simple Quiz (HTML)</h1>
+    <div class="quiz">
+        <h2 id="question">Question goes here</h2>
+        <div id="answer-buttons">
+            <button class="btn">Answer 1</button>
+            <button class="btn">Answer 2</button>
+            <button class="btn">Answer 3</button>
+            <button class="btn">Answer 4</button>
+        </div>
+        <button id="next-btn">Next</button>
+        <div class="s"><a href="index.html" id="home-link" class="hidden">Home</a></div>
+    
+    </div>
+</div> 
+    <script>
+        const questions = [
+    {
+        question: "What does HTML stand for?",
+        answers: [
+            { text: "Hyper Text Markup Language", correct: true },
+            { text: "Hyperlinks and Text Markup Language", correct: false },
+            { text: "Home Tool Markup Language", correct: false },
+            { text: "Hyper Transfer Markup Language", correct: false },
+        ]
+    },
+    {
+        question: "Which tag is used to create a hyperlink in HTML?",
+        answers: [
+            { text: "&lt;a&gt;", correct: true },
+            { text: "&lt;link&gt;", correct: false },
+            { text: "&lt;href&gt;", correct: false },
+            { text: "&lt;hyperlink&gt;", correct: false },
+        ]
+    },
+    {
+        question: "Which HTML element is used for creating a bulleted list?",
+        answers: [
+            { text: "&lt;ol&gt;", correct: false },
+            { text: "&lt;li&gt;", correct: false },
+            { text: "&lt;ul&gt;", correct: true },
+            { text: "&lt;list&gt;", correct: false },
+        ]
+    },
+    {
+        question: "What does the &lt;img&gt; tag do in HTML?",
+        answers: [
+            { text: "Embeds an audio file", correct: false },
+            { text: "Inserts an image", correct: true },
+            { text: "Creates a hyperlink", correct: false },
+            { text: "Defines a table", correct: false },
+        ]
+    },
+
+    {
+        question: "Which HTML element is used for defining the structure of a web page?",
+        answers: [
+            { text: "&lt;body&gt", correct: false },
+            { text: "&lt;head&gt", correct: false },
+            { text: "&lt;html&gt", correct: true },
+            { text: "&lttitle&gt", correct: false },
+        ]
+    },
+    {
+        question: "What does the &lt;br&gt; tag do in HTML?",
+        answers: [
+            { text: "Adds a line break", correct: true },
+            { text: "Creates a bullet point", correct: false },
+            { text: "Inserts a hyperlink", correct: false },
+            { text: "Defines a paragraph", correct: false },
+        ]
+    },
+    {
+        question: "What is the purpose of the &lt;meta&gt; tag in HTML?",
+        answers: [
+            { text: "Defines metadata about an HTML document", correct: true },
+            { text: "Creates a hyperlink", correct: false },
+            { text: "Inserts an image", correct: false },
+            { text: "Defines a table", correct: false },
+        ]
+    },
+    {
+        question: "Which tag is used to define the title of an HTML document?",
+        answers: [
+            { text: "&lt;title&gt;", correct: true },
+            { text: "&lt;head&gt;", correct: false },
+            { text: "&lt;meta&gt;", correct: false },
+            { text: "&lt;header&gt;", correct: false },
+        ]
+    },
+    {
+        question: "What does the &lt;h1&gt; tag represent in HTML?",
+        answers: [
+            { text: "A hyperlink", correct: false },
+            { text: "The main heading", correct: true },
+            { text: "A table header", correct: false },
+            { text: "A line break", correct: false },
+        ]
+    },
+    {
+        question: "Which tag is used to define a paragraph in HTML?",
+        answers: [
+            { text: "&lt;para&gt", correct: false },
+            { text: "&lt;p&gt", correct: true },
+            { text: "&lt;paragraph&gt", correct: false },
+            { text: "&lt;text&gt;", correct: false },
+        ]
+    },
+    {
+        question: "What does the &lt;td&gt; tag represent in HTML?",
+        answers: [
+            { text: "Defines a table data cell", correct: true },
+            { text: "Defines a table header cell", correct: false },
+            { text: "Defines a table row", correct: false },
+            { text: "Defines a table", correct: false },
+        ]
+    },
+    {
+        question: "Which attribute specifies the URL of the image to be displayed by the &lt;img&gt; tag?",
+        answers: [
+            { text: "src", correct: true },
+            { text: "alt", correct: false },
+            { text: "href", correct: false },
+            { text: "title", correct: false },
+        ]
+    },
+    {
+        question: "Which tag is used to create an unordered list in HTML?",
+        answers: [
+            { text: "&lt;ul&gt;", correct: true },
+            { text: "&lt;ol&gt;", correct: false },
+            { text: "&lt;li&gt;", correct: false },
+            { text: "&lt;list&gt;", correct: false },
+        ]
+    },
+    {
+        question: "What is the purpose of the &lt;input&gt; tag in HTML?",
+        answers: [
+            { text: "To create a text input field", correct: true },
+            { text: "To create a hyperlink", correct: false },
+            { text: "To create a button", correct: false },
+            { text: "To create an image", correct: false },
+        ]
+    },
+    {
+        question: "Which tag is used to define a hyperlink in HTML?",
+        answers: [
+            { text: "&lt;a&gt;", correct: true },
+            { text: "&lt;link&gt;", correct: false },
+            { text: "&lt;href&gt;", correct: false },
+            { text: "&lt;hyperlink&gt;", correct: false },
+        ]
+    }
+];
+
+const questionsElement=document.getElementById("question");
+const answerButtons = document.getElementById("answer-buttons");
+const nextButton = document.getElementById("next-btn");
+
+let correctQuestionIndex=0;
+let score = 0;
+
+function startQuiz(){
+correctQuestionIndex=0;
+score=0;
+nextButton.innerHTML="Next";
+showQuestion();
+}
+
+function showQuestion(){
+    resetState();
+    let currentQestion=questions[correctQuestionIndex];
+    let questionNo = correctQuestionIndex+1;
+    questionsElement.innerHTML=questionNo+","+currentQestion.question
+
+    currentQestion.answers.forEach(answer=>{
+        const button=document.createElement("button")
+        button.innerHTML=answer.text;
+        button.classList.add("btn")
+        answerButtons.appendChild(button)
+        if(answer.correct){
+            button.dataset.correct=answer.correct;
+        }
+        button.addEventListener('click',selectAnswer);
+    });
+}
+
+ function resetState() {
+    nextButton.style.display="none"
+    while(answerButtons.firstChild){
+        answerButtons.removeChild(answerButtons.firstChild);
+    }
+ }
+
+ function selectAnswer (e){
+    const selectedBtn = e.target;
+    const isCorrect = selectedBtn.dataset.correct==="true";
+    if(isCorrect){
+        selectedBtn.classList.add("correct")
+        score++;
+    }
+    else{
+        selectedBtn.classList.add("incorrect")
+    }
+    Array.from(answerButtons.children).forEach(button=>{
+       if(button.dataset.correct==="true"){
+        button.classList.add("correct")
+       }
+       button.disabled=true;
+    })
+    nextButton.style.display="block"
+ }
+
+function showScore(){
+    resetState();
+    questionsElement.innerHTML=`your scored ${score} out of ${questions.length}!`;
+    nextButton.innerHTML="play Again"
+    nextButton.style.display="block"
+}
+
+
+function handleNextButton(){
+    correctQuestionIndex++;
+    if(correctQuestionIndex <questions.length){
+        showQuestion()
+    }
+    else{
+        showScore();
+    }
+}
+
+
+
+
+nextButton.addEventListener('click',()=>{
+    if(correctQuestionIndex < questions.length){
+        handleNextButton();
+    }
+    else{
+        startQuiz();
+    }
+})
+
+
+
+startQuiz();
+    </script>
+</body>
+</html>

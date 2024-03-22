@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>CSS Quize App </title>
+</head>
+<style>
+    *{
+    margin: 0px;
+    padding: 0px;
+    font-family: 'poppins', sans-serif;
+    box-sizing: border-box;
+}
+body{
+    background: #001e4d;
+}
+.app{
+    background: #fff;
+    width: 90%;
+    max-width: 600px;
+    margin: 100px auto 0;
+    border-radius: 10px;
+    padding: 30px;
+}
+
+.app h1{
+    font-size: 25px;
+    color: #001e4d;
+    font-weight: 600;
+    border-bottom: 1px solid #333;
+    padding-bottom: 30px;
+}
+
+.quiz{
+padding: 20px 0;
+}
+
+.quiz h1{
+    font-size: 18px;
+    color:#001e4d ;
+    font-weight: 600;
+}
+
+.btn{
+    background: #fff;
+    color: #222;
+    font-weight: 500;
+    width: 100%;
+    border: 1px solid #222;
+    padding: 10px;
+    margin: 10px 0;
+    text-align: left;
+    border-radius: 4px ;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.btn:hover:not([disabled]){
+    background: #222;
+    color: #fff;
+}
+.btn:disabled{
+    cursor:no-drop;
+}
+
+#next-btn{
+    background: #001e4d;
+    color: #fff;
+    font-weight: 500px;
+    width: 150px;
+    border: 0;
+    padding: 10px;
+    margin: 20px auto 0;
+    border-radius: 4px;
+    cursor: pointer;
+    display: none;
+}
+
+.correct{
+    background: #9aeabc;
+
+}
+.incorrect{
+    background: #ff9393;
+}
+
+.s{
+    margin-top: 10px;
+}
+a{
+    background: #fff;
+    color: #222;
+    font-weight: 500;
+    width: 100%;
+    border: 1px solid #222;
+    padding: 10px;
+    margin: 10px 0;
+    text-align: left;
+    border-radius: 4px ;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    background: #001e4d;
+    color: #fff;
+   
+}
+</style>
+<body>
+<div class="app">
+    <h1>simple Quiz (CSS)</h1>
+    <div class="quiz">
+        <h2 id="question">Question goes here</h2>
+        <div id="answer-buttons">
+            <button class="btn">Answer 1</button>
+            <button class="btn">Answer 2</button>
+            <button class="btn">Answer 3</button>
+            <button class="btn">Answer 4</button>
+        </div>
+        <button id="next-btn">Next</button>
+        <div class="s"><a href="index.html">Home</a></div>
+    </div>
+</div> 
+    <script>
+        const questions = [
+    {
+        question: "Which property is used to change the background color of an element in CSS?",
+        answers: [
+            { text: "background-color", correct: true },
+            { text: "color", correct: false },
+            { text: "background-image", correct: false },
+            { text: "border-color", correct: false },
+        ]
+    },
+    {
+        question: "What does CSS stand for?",
+        answers: [
+            { text: "Cascading Style Sheets", correct: true },
+            { text: "Creative Style Sheets", correct: false },
+            { text: "Computer Style Sheets", correct: false },
+            { text: "Colorful Style Sheets", correct: false },
+        ]
+    },
+    {
+        question: "Which property is used to change the font size of an element in CSS?",
+        answers: [
+            { text: "font-size", correct: true },
+            { text: "text-size", correct: false },
+            { text: "font-style", correct: false },
+            { text: "size", correct: false },
+        ]
+    },
+    {
+        question: "Which CSS property is used to control the spacing between elements?",
+        answers: [
+            { text: "margin", correct: true },
+            { text: "padding", correct: false },
+            { text: "spacing", correct: false },
+            { text: "gap", correct: false },
+        ]
+    },
+    {
+        question: "Which property is used to make text bold in CSS?",
+        answers: [
+            { text: "font-weight", correct: true },
+            { text: "bold", correct: false },
+            { text: "text-weight", correct: false },
+            { text: "font-style", correct: false },
+        ]
+    },
+    {
+        question: "What does the CSS property 'display: none;' do?",
+        answers: [
+            { text: "Hides the element", correct: true },
+            { text: "Displays the element as a block", correct: false },
+            { text: "Displays the element as an inline element", correct: false },
+            { text: "Displays the element as an inline-block element", correct: false },
+        ]
+    },
+    {
+        question: "Which CSS property is used to add shadows to text?",
+        answers: [
+            { text: "text-shadow", correct: true },
+            { text: "box-shadow", correct: false },
+            { text: "shadow", correct: false },
+            { text: "text-effect", correct: false },
+        ]
+    },
+    {
+        question: "Which property is used to change the color of text in CSS?",
+        answers: [
+            { text: "color", correct: true },
+            { text: "font-color", correct: false },
+            { text: "text-color", correct: false },
+            { text: "font-style", correct: false },
+        ]
+    },
+    {
+        question: "Which CSS property is used to create rounded corners on elements?",
+        answers: [
+            { text: "border-radius", correct: true },
+            { text: "corner-radius", correct: false },
+            { text: "border-style", correct: false },
+            { text: "border-corner", correct: false },
+        ]
+    },
+    {
+        question: "What does the 'box-sizing: border-box;' property do in CSS?",
+        answers: [
+            { text: "Includes padding and border in the element's total width and height", correct: true },
+            { text: "Includes margin in the element's total width and height", correct: false },
+            { text: "Does not include padding and border in the element's total width and height", correct: false },
+            { text: "Does not include margin in the element's total width and height", correct: false },
+        ]
+    },
+    {
+        question: "Which CSS property is used to align text?",
+        answers: [
+            { text: "text-align", correct: true },
+            { text: "align-text", correct: false },
+            { text: "text-justify", correct: false },
+            { text: "text-alignments", correct: false },
+        ]
+    },
+    {
+        question: "What does the 'float' property do in CSS?",
+        answers: [
+            { text: "Allows an element to be positioned to the left or right of its container", correct: true },
+            { text: "Moves an element to the top of its container", correct: false },
+            { text: "Aligns text within its container", correct: false },
+            { text: "Makes an element transparent", correct: false },
+        ]
+    },
+    {
+        question: "Which CSS property is used to control the transparency of an element?",
+        answers: [
+            { text: "opacity", correct: true },
+            { text: "transparency", correct: false },
+            { text: "alpha", correct: false },
+            { text: "visibility", correct: false },
+        ]
+    },
+    {
+        question: "What does the 'position: relative;' property do in CSS?",
+        answers: [
+            { text: "Positions an element relative to its normal position", correct: true },
+            { text: "Positions an element absolutely within its parent", correct: false },
+            { text: "Positions an element relative to the viewport", correct: false },
+            { text: "Positions an element statically", correct: false },
+        ]
+    },
+    {
+        question: "Which CSS property is used to specify the order of flexible items?",
+        answers: [
+            { text: "order", correct: true },
+            { text: "flex-order", correct: false },
+            { text: "flex-ordering", correct: false },
+            { text: "flex-item-order", correct: false },
+        ]
+    }
+];
+
+const questionsElement=document.getElementById("question");
+const answerButtons = document.getElementById("answer-buttons");
+const nextButton = document.getElementById("next-btn");
+
+let correctQuestionIndex=0;
+let score = 0;
+
+function startQuiz(){
+correctQuestionIndex=0;
+score=0;
+nextButton.innerHTML="Next";
+showQuestion();
+}
+
+function showQuestion(){
+    resetState();
+    let currentQestion=questions[correctQuestionIndex];
+    let questionNo = correctQuestionIndex+1;
+    questionsElement.innerHTML=questionNo+","+currentQestion.question
+
+    currentQestion.answers.forEach(answer=>{
+        const button=document.createElement("button")
+        button.innerHTML=answer.text;
+        button.classList.add("btn")
+        answerButtons.appendChild(button)
+        if(answer.correct){
+            button.dataset.correct=answer.correct;
+        }
+        button.addEventListener('click',selectAnswer);
+    });
+}
+
+ function resetState() {
+    nextButton.style.display="none"
+    while(answerButtons.firstChild){
+        answerButtons.removeChild(answerButtons.firstChild);
+    }
+ }
+
+ function selectAnswer (e){
+    const selectedBtn = e.target;
+    const isCorrect = selectedBtn.dataset.correct==="true";
+    if(isCorrect){
+        selectedBtn.classList.add("correct")
+        score++;
+    }
+    else{
+        selectedBtn.classList.add("incorrect")
+    }
+    Array.from(answerButtons.children).forEach(button=>{
+       if(button.dataset.correct==="true"){
+        button.classList.add("correct")
+       }
+       button.disabled=true;
+    })
+    nextButton.style.display="block"
+ }
+
+function showScore(){
+    resetState();
+    questionsElement.innerHTML=`your scored ${score} out of ${questions.length}!`;
+    nextButton.innerHTML="play Again"
+    nextButton.style.display="block"
+}
+
+
+function handleNextButton(){
+    correctQuestionIndex++;
+    if(correctQuestionIndex <questions.length){
+        showQuestion()
+    }
+    else{
+        showScore();
+    }
+}
+
+
+
+
+nextButton.addEventListener('click',()=>{
+    if(correctQuestionIndex < questions.length){
+        handleNextButton();
+    }
+    else{
+        startQuiz();
+    }
+})
+
+
+
+startQuiz();
+    </script>
+</body>
+</html>
